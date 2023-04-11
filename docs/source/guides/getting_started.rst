@@ -23,7 +23,7 @@ The easiest way to install SciencePlots is by using ``pip``:
 
 .. deprecated::
     CJK fonts were deprecated, in favor of other packages that support and
-    maintain them. E.g. `mplfonts<https://github.com/Clarmy/mplfonts>`_.
+    maintain them. E.g. :mplfonts:``.
 
 Using the Styles
 ----------------

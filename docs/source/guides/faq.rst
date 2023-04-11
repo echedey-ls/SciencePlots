@@ -2,7 +2,7 @@ FAQ
 ===
 If you need any help with SciencePlots, please first check the
 the question has not already been addressed here and search through
-`previous GitHub issues <|repo_base_link + "issues?q=is%3Aissue"|>`_.
+:ghissuetracker:``.
 If you didn't find an answer, you can create a new issue.
 
 You can checkout `Matplotlib's documentation
@@ -82,7 +82,7 @@ different font, you can use:
     plt.rcParams.update({
         "font.family": "serif",   # specify font family here
         "font.serif": ["Times"],  # specify font here
-        "font.size": 11})          # specify font size here
+        "font.size": 11})         # specify font size here
 
 
 - If you would like to use Times New Roman specifically, please see the

@@ -34,12 +34,15 @@ exclude_patterns = []
 repo_base_link = 'https://github.com/garrettj403/SciencePlots/'
 extlinks = {
     'ghissue': (repo_base_link + 'issues/%s', 'issue %s'),
-    'ghpull': (repo_base_link + 'pull/%s', 'pull request '),
+    'ghissuetracker': (repo_base_link + 'issues/', 'issue tracker'),
+    'ghpull': (repo_base_link + 'pull/%s', 'pull request %s'),
     'ghwiki': (repo_base_link + 'wiki/%s', 'wiki '),
     'ghuser': ('https://github.com/%s', '@%s'),
     'doi': ('http://doi.org/%s', 'DOI: %s'),
     'ghmatplotlibissue': ('https://github.com/matplotlib/matplotlib/issues/%s',
-                          'Matplotlib issue %s')
+                          'Matplotlib issue %s'),
+    'mplfonts': ('https://github.com/Clarmy/mplfonts', '`mplfonts`'),
+
 }
 # Warn replaceable hardcoded links
 extlinks_detect_hardcoded_links = True
