@@ -102,6 +102,8 @@ html_theme_options = {
 html_show_sourcelink = False
 
 # Modify edit this page links to refer to original repo
+# TODO: readthedocs procedure
+# https://github.com/readthedocs/readthedocs.org/issues/2971
 html_context = {
     "github_user": "garretj403",
     "github_repo": "SciencePlots"
