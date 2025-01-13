@@ -7,12 +7,12 @@ on:
     branches: [ "master" ]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.x"]
+        python-version: ["3.8", "3.9", "3.10", "3.11", "3.12", "3.13", "3.x"]
 
     steps:
     - uses: actions/checkout@v4
@@ -27,6 +27,9 @@ jobs:
         sudo apt update
         sudo apt install dvipng texlive-latex-extra texlive-fonts-recommended cm-super
         sudo apt install fonts-noto-cjk
+    - name: Show installed packages versions
+      run: |
+        python -m pip freeze
     - name: Test with pytest
       run: |
         pytest
