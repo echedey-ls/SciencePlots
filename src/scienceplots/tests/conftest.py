@@ -6,10 +6,21 @@ import pytest
 import scienceplots
 import numpy as np
 
+import importlib.metadata
 import os
+from packaging.version import Version
 from pathlib import Path
 
-STYLES_PATH = Path(scienceplots.__path__[0], "styles")
+SCIENCEPLOTS_STYLES_PATH = Path(scienceplots.__path__[0], "styles")
+
+
+matplotlib_version = Version(importlib.metadata.version("matplotlib"))
+# API changes to plt.style.core (namespace refactor)
+matplotlib_le_3_10 = matplotlib_version <= Version("3.10")
+# Scheduled removal of compat layer added in 3.11
+matplotlib_ge_3_13 = matplotlib_version >= Version("3.13")
+# Versions where warnings should be suppressed
+matplotlib_eq_3_11_or_3_12 = not matplotlib_ge_3_13 and not matplotlib_le_3_10
 
 
 def get_styles_in_dir(dir):
@@ -27,8 +38,9 @@ def styles_in_scienceplots_per_folder():
     Output: dictionary of styles per folder in SciencePlots
     """
     styles_per_folder = {}
-    for folder, _, _ in os.walk(STYLES_PATH):  # 1st _ : subdirs, 2nd _ : files
-        folder = Path(folder)
+    for folder, _, _ in os.walk(SCIENCEPLOTS_STYLES_PATH):
+        # 1st, current folder; 2nd, subdirs in current; 3rd, files in current
+        folder = Path(folder).relative_to(SCIENCEPLOTS_STYLES_PATH)
         styles_per_folder[folder.name] = get_styles_in_dir(folder)
     return styles_per_folder
 
