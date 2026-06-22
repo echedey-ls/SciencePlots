@@ -16,19 +16,19 @@ SCIENCEPLOTS_STYLES_PATH = Path(scienceplots.__path__[0], "styles")
 
 matplotlib_version = Version(importlib.metadata.version("matplotlib"))
 # API changes to plt.style.core (namespace refactor)
-matplotlib_le_3_10 = matplotlib_version <= Version("3.10")
+matplotlib_le_3_10 = matplotlib_version < Version("3.11")
 # Scheduled removal of compat layer added in 3.11
 matplotlib_ge_3_13 = matplotlib_version >= Version("3.13")
 # Versions where warnings should be suppressed
 matplotlib_eq_3_11_or_3_12 = not matplotlib_ge_3_13 and not matplotlib_le_3_10
 
 
-def get_styles_in_dir(dir):
+def get_styles_in_dir(folder):
     """
     Input: directory path
     Output: set of matplotlib styles filenames (without trailing '.mplstyle')
     """
-    styles_paths = Path(dir).glob("*.mplstyle")
+    styles_paths = Path(folder).glob("*.mplstyle")
     return set(fn.stem for fn in styles_paths)
 
 
