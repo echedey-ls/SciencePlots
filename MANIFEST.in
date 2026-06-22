@@ -12,4 +12,5 @@ include README.md
 # Clean unnecessary files in source distribution:
 prune .github
 prune .git
+prune ci
 prune examples
