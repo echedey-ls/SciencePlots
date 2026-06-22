@@ -28,6 +28,7 @@ jobs:
           sudo apt install dvipng texlive-latex-extra texlive-fonts-recommended cm-super
           sudo apt install fonts-noto-cjk
       - name: Add permission to script(s)
+        run:
           sudo chmod +x ci/run_unix_test_loop.sh
       - name: Test with pytest via wrapper that matrix-tests specific Matplotlib versions
         run: |
