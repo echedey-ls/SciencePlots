@@ -43,6 +43,7 @@ def test_usage_of_each_style(
     pparam = {"xlabel": "Voltage (mV)", "ylabel": r"Current ($\mu$A)"}
     x, ys, p = xy_example_values
     for folder, styles in styles_in_scienceplots_per_folder.items():
+        folder = folder.replace("/", "_").replace("\\", "_")  # Fix accessing styles subfolders
         for style in styles:
             output_file = tmp_path / f"test_{folder}_{style}.png"
             with plt.style.context(style):

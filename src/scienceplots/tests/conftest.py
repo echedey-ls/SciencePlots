@@ -40,8 +40,9 @@ def styles_in_scienceplots_per_folder():
     styles_per_folder = {}
     for folder, _, _ in os.walk(SCIENCEPLOTS_STYLES_PATH):
         # 1st, current folder; 2nd, subdirs in current; 3rd, files in current
-        folder = Path(folder).relative_to(SCIENCEPLOTS_STYLES_PATH)
-        styles_per_folder[folder.name] = get_styles_in_dir(folder)
+        folder_abs = Path(folder)
+        folder_rel = folder_abs.relative_to(SCIENCEPLOTS_STYLES_PATH)
+        styles_per_folder[str(folder_rel)] = get_styles_in_dir(folder_abs)
     return styles_per_folder
 
 
