@@ -31,4 +31,4 @@ jobs:
         sudo chmod +x ci/run_unix_test_loop.sh
     - name: Test with pytest via wrapper that matrix-tests specific Matplotlib versions
       run: |
-        ci/run_unix_test_loop.sh
+        ./ci/run_unix_test_loop.sh
