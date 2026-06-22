@@ -57,7 +57,7 @@ while read line || [[ -n ${line} ]]; do
     fi
 done < "${py_matplotlib_versions_file}"
 
-if [[ ${n_errors} ]]; then
+if [[ ! ${n_errors} ]]; then  # 0 is true in bash
     # 0 -> success
     echo "All ${n_tests} tests were successful."
 else
