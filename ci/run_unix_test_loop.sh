@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Copyright notice: you are allowed to use this script as long as you credit the author and all it's contributors on the following list:
+# Author: Echedey Luis, June 2026.
 
 # make sure current dir is project tree
 # https://stackoverflow.com/questions/3349105/how-can-i-set-the-current-working-directory-to-the-directory-of-the-script-in-ba
@@ -7,10 +9,11 @@ cd ..
 
 # assert a python virtual environment is active
 if [[ ! "$VIRTUAL_ENV" != "" ]]; then
-    echo "A Python virtual environment must be set for this test to guarantee successful testing."
-    exit -1
+    python -c "import scienceplots"
+    if [[ ! $? ]]; then  # unsuccessful import of scienceplots
+        echo "scienceplots is not installed. Did you forget to create a venv and install it?"
+    fi
 fi
-
 
 # extract current python version
 # https://stackoverflow.com/questions/13373249/extract-substring-using-regexp-in-plain-bash
@@ -22,7 +25,6 @@ if [ ! -f ${py_matplotlib_versions_file} ]; then
     echo "Matplotlib versions file for Python ${py_version}: '${py_matplotlib_versions_file}' not found; exiting early."
     exit -2
 fi
-
 
 # loop through file lines
 # https://stackoverflow.com/questions/1521462/looping-through-the-content-of-a-file-in-bash
@@ -49,13 +51,13 @@ while read line || [[ -n ${line} ]]; do
         mpl_version=$(echo ${line} | sed -E -n 's|^([0-9]+\.[0-9]+\.[0-9]+).*$|\1|p')
         pip install matplotlib~=${mpl_version}
         pytest
-        if [[ $? ]]; then
+        if [[ ! $? ]]; then  # non-zero exit -> count as error
             ((++n_errors))
         fi
     fi
 done < "${py_matplotlib_versions_file}"
 
-if [[ ${n_errors} ]]; then
+if [[ ${n_errors} ]]; then  # 0 is true in bash
     # 0 -> success
     echo "All ${n_tests} tests were successful."
 else
