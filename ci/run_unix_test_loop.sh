@@ -51,13 +51,13 @@ while read line || [[ -n ${line} ]]; do
         mpl_version=$(echo ${line} | sed -E -n 's|^([0-9]+\.[0-9]+\.[0-9]+).*$|\1|p')
         pip install matplotlib~=${mpl_version}
         pytest
-        if [[ $? ]]; then
+        if [[ ! $? ]]; then  # non-zero exit -> count as error
             ((++n_errors))
         fi
     fi
 done < "${py_matplotlib_versions_file}"
 
-if [[ ! ${n_errors} ]]; then  # 0 is true in bash
+if [[ ${n_errors} ]]; then  # 0 is true in bash
     # 0 -> success
     echo "All ${n_tests} tests were successful."
 else
